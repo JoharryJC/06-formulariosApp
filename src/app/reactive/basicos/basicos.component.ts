@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styles: [
   ]
 })
-export class BasicosComponent {
+export class BasicosComponent implements OnInit {
 
   /*
 
@@ -31,10 +31,39 @@ export class BasicosComponent {
 
   constructor(private fb: FormBuilder) { }
 
+  ngOnInit(): void {
+    //this.miFormulario.setValue({
+    this.miFormulario.reset({
+      nombre: 'RTX 4080Ti', 
+      precio: 1600 
+    })
+  }
+
   campoEsValido(campo: string ) {
       return  this.miFormulario.controls[campo].errors && 
               this.miFormulario.controls[campo].touched; 
   }
   
+  guardar() {
+
+    if (this.miFormulario.invalid) {
+      //esto marcando como que todos los campos fueron tocados, 
+      //para que mi formulario muestre los mensajes de error 
+      //de todos los campos 
+      this.miFormulario.markAllAsTouched();
+      return; 
+    }  
+
+    console.log(this.miFormulario.value); 
+    this.miFormulario.reset(); 
+    //puedo incluir en el reset los valores de esta forma:
+    /*
+    this.miFormulario.reset({
+      nombre: 'RTX 4080Ti', 
+      precio: 1600 
+    })
+    */
+
+  }
 
 }
