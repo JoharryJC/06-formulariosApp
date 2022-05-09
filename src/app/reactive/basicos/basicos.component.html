@@ -4,7 +4,10 @@
 <div class="row">
     <div class="col">
         <!-- (ngSubmit)="guardar(miFormulario)"  -->
-        <form autocomplete="off" [formGroup]="miFormulario" >
+        <form 
+                autocomplete="off" 
+                [formGroup]="miFormulario" 
+        >
             <!-- Campo de Producto -->
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Producto</label>
@@ -17,7 +20,9 @@
                             placeholder="Nombre del producto"
                             >
 
-                    <span class="form-text text-danger"> 
+                    <span class="form-text text-danger" 
+                          *ngIf="campoEsValido('nombre')" 
+                    > 
                         Debe ser de 3 letras
                     </span>
                 </div>
@@ -32,7 +37,9 @@
                             formControlName="precio"                           
                             placeholder="Precio del producto"
                             > 
-                    <span class="form-text text-danger"> 
+                    <span   class="form-text text-danger" 
+                            *ngIf="campoEsValido('precio')" 
+                    > 
                         El precio debe de ser 0 o mayor
                     </span>
                 </div>
@@ -47,13 +54,19 @@
                             formControlName="existencias" 
                             placeholder="Existencias del producto"
                             >
+                    <span   class="form-text text-danger" 
+                            *ngIf="campoEsValido('existencias')" 
+                    > 
+                        Las existencias debe de ser 0 o mayor
+                    </span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <button type="submit" 
-                            class="btn btn-primary float-end">
+                            class="btn btn-primary float-end" 
+                            [disabled]="miFormulario.invalid">
                         Guardar
                     </button>
                 </div>
@@ -78,6 +91,9 @@
 
         <span>Value</span>
         <pre>{{ miFormulario.value | json }}</pre>
+
+        <span>Precio</span>
+        <pre>{{ miFormulario.controls['precio'].errors | json }}</pre>
 
         
     </div>
