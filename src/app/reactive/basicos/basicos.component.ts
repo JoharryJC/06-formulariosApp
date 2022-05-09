@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-basicos',
@@ -9,11 +9,27 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class BasicosComponent {
 
+  /*
+
+  Este codigo fue el primero que hicimos, 
+  pero ahora usaremos FormBuilder 
+
   miFormulario: FormGroup = new FormGroup({
-    'nombre': new FormControl('RTX 4080Ti')
+    'nombre': new FormControl('RTX 4080Ti'),
+    'precio': new FormControl(1500),
+    'existencias': new FormControl(5),
+
+  });  
+  */
+
+  miFormulario: FormGroup = this.fb.group({
+    nombre: ['RTX 4080Ti'], 
+    precio: [0], 
+    existencias: [0] 
   });
 
-  constructor() { }
+
+  constructor(private fb: FormBuilder) { }
 
   
 
