@@ -16,7 +16,14 @@ export class RegistroComponent implements OnInit {
     nombre: ['', [Validators.required, Validators.pattern(this.validatorService.nombreApellidoPattern) ] ], 
     email: ['', [Validators.required, Validators.pattern(this.validatorService.emailPattern)] ], 
     username: ['', [Validators.required, this.validatorService.noPuedeSerStrider ]  ], 
-  });
+    password: ['', [Validators.required, Validators.minLength(6) ]  ], 
+    password2: ['', [Validators.required ]  ], 
+  } /*, {
+    //no funciona esta validacion, a pesar de que es exactamente igual a la del curso
+    //esta deprecada esta funcion 
+    Validators: [this.validatorService.camposIguales('password', 'password2')] 
+  }  */
+  );
 
   constructor(private fb: FormBuilder, 
     private validatorService: ValidatorService) { }
